@@ -108,13 +108,14 @@ scene.add(directionalLight);
 
   group = new THREE.Object3D();
 
-  for (var i = 0; i < 200; i ++) {
+  for (var i = 0; i < 50; i ++) {
     var mesh = new THREE.Mesh( geometry, material );
     mesh.position.x = Math.random() * 1000 - 500;
     mesh.position.y = Math.random() * 1000 - 500;
     mesh.position.z = Math.random() * 1000 - 500;
     mesh.rotation.x = Math.random() * 2 * Math.PI;
     mesh.rotation.y = Math.random() * 2 * Math.PI;
+    console.log(mesh.position);
     mesh.matrixAutoUpdate = false;
     mesh.updateMatrix();
 
@@ -148,8 +149,8 @@ function setRenderSize(width, height, vr) {
     var leftTx = vrHMD.getEyeTranslation("left");
     var rightTx = vrHMD.getEyeTranslation("right");
 
-    cameraLeft.position.add(new THREE.Vector3(leftTx.x, leftTx.y, leftTx.z));
-    cameraRight.position.add(new THREE.Vector3(rightTx.x, rightTx.y, rightTx.z));
+    cameraLeft.position.sub(new THREE.Vector3(leftTx.x, leftTx.y, leftTx.z));
+    cameraRight.position.sub(new THREE.Vector3(rightTx.x, rightTx.y, rightTx.z));
 
     renderer.setSize(width * 2, height, true, 2);
     container.style.width = (width * 2) + "px";
